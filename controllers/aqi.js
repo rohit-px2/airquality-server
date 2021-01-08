@@ -5,13 +5,14 @@ const config = require('../utils/config')
 
 const baseUrl = 'https://api.waqi.info/feed'
 
-const getInfo = async city => {
+
+async function getInfo(city) {
 	const response = await axios.get(`${baseUrl}/${city}/?token=${config.API_KEY}`)
 	return response
 }
 
 
-const getDate = () => {
+function getDate() {
 	const d = new Date()
 	const d1 = d.toISOString()
 	const d2 = d1.split("T")
@@ -20,7 +21,7 @@ const getDate = () => {
 }
 
 
-const parseCity = async (country, info) => {
+async function parseCity(country, info) {
 	// parses the raw object from the API into the City model.
 	return new City({
 		day: getDate(),

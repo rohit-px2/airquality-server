@@ -20,6 +20,12 @@ const citySchema = new mongoose.Schema({
 
 citySchema.plugin(uniqueValidator)
 
+citySchema.set('toJSON', {
+	transform: (document, returnedObject) => {
+		delete returnedObject._id
+	}
+})
+
 const City = mongoose.model('City', citySchema)
 
 module.exports = City
