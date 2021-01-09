@@ -21,17 +21,20 @@ function getDate() {
 }
 
 
-async function parseCity(country, info) {
+function parseCity(country, city, info) {
+	const statistics = Object.keys(info.iaqi).map(key => {
+		return {
+			[key]: info.iaqi[key]
+		}
+	})
+	console.log(statistics)
 	// parses the raw object from the API into the City model.
 	return new City({
 		day: getDate(),
-		city: info.city.name,
+		city,
 		country,
 		aqi: info.aqi,
-		no2: info.iaqi.no2.v,
-		o3: info.iaqi.o3.v,
-		pm25: info.iaqi.pm25.v,
-		so2: info.iaqi.so2.v,
+		stats: statistics
 	})
 }
 
@@ -42,10 +45,11 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 	console.log(city)
 	console.log(country)
 	const dbInfo = await City.findOne({
-		country,
+		day: getDate(),
 		city,
-		day: getDate()
+		country,
 	})
+	console.log(dbInfo)
 	if (dbInfo) {
 		console.log("Received information from MongoDB database")
 		response.status(200).json(dbInfo)
@@ -55,11 +59,13 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 			const reqInfo = await getInfo(city)
 			console.log("RECEIVED INFO")
 			// Fit this into our City data structure
-			const cityObj = await parseCity(country, reqInfo.data.data)
+			const cityObj = parseCity(country, city, reqInfo.data.data)
+			console.log("The object is", cityObj)
 			await cityObj.save()
 			response.status(200).json(cityObj)
 		}
 		catch (error) {
+			console.error("An error occurred", error)
 			response.status(404).send()
 		}
 	}

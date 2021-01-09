@@ -12,10 +12,7 @@ const citySchema = new mongoose.Schema({
 		required: true,
 	},
 	aqi: Number,
-	no2: Number,
-	o3: Number,
-	pm25: Number,
-	so2: Number
+	stats: mongoose.Schema.Types.Mixed
 })
 
 citySchema.plugin(uniqueValidator)
@@ -23,6 +20,7 @@ citySchema.plugin(uniqueValidator)
 citySchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		delete returnedObject._id
+		delete returnedObject.__v
 	}
 })
 
