@@ -27,7 +27,6 @@ function parseCity(country, city, info) {
 			[key]: info.iaqi[key]
 		}
 	})
-	console.log(statistics)
 	// parses the raw object from the API into the City model.
 	return new City({
 		day: getDate(),
@@ -42,8 +41,6 @@ function parseCity(country, city, info) {
 aqiRouter.get("/:country/:city", async (request, response) => {
 	const country = request.params.country
 	const city = request.params.city
-	console.log(city)
-	console.log(country)
 	const dbInfo = await City.findOne({
 		day: getDate(),
 		city,

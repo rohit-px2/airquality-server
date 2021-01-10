@@ -6,7 +6,8 @@ const mongoose = require('mongoose')
 const aqiRouter = require('./controllers/aqi')
 const locationRouter = require('./controllers/location')
 
-mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex:true})
+mongoose
+	.connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex:true})
 	.then(() => {
 		console.log("Connected to MongoDB")
 	})
@@ -21,4 +22,5 @@ app.use(express.json())
 
 app.use("/api/info", aqiRouter)
 app.use("/api/location", locationRouter)
+
 module.exports = app

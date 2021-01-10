@@ -12,7 +12,7 @@ const citySchema = new mongoose.Schema({
 		required: true,
 	},
 	aqi: Number,
-	stats: mongoose.Schema.Types.Mixed
+	stats: Array
 })
 
 citySchema.plugin(uniqueValidator)
