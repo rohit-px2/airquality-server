@@ -52,9 +52,10 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 		response.status(200).json(dbInfo)
 	}
 	else {
-		try{
+		try {
 			const reqInfo = await getInfo(city)
-			console.log("RECEIVED INFO")
+			console.log("Received info from API")
+			console.log(reqInfo)
 			// Fit this into our City data structure
 			const cityObj = parseCity(country, city, reqInfo.data.data)
 			console.log("The object is", cityObj)
@@ -63,7 +64,9 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 		}
 		catch (error) {
 			console.error("An error occurred", error)
-			response.status(404).send()
+			response.status(404).send({
+				error: 'Resource not found'
+			})
 		}
 	}
 })
