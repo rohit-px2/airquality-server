@@ -4,6 +4,7 @@ const axios = require('axios')
 const baseUrl = "http://ip-api.com/json"
 
 locationRouter.get('/', async (request, response) => {
+	console.log(request)
 	const ip = request.ip.replace('::ffff:', '')
 	console.log(ip)
 	const locationJSON = await axios.get(`${baseUrl}/${ip}`)
