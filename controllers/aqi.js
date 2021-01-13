@@ -39,8 +39,12 @@ function parseCity(country, city, info) {
 
 
 aqiRouter.get("/:country/:city", async (request, response) => {
-	const country = request.params.country
-	const city = request.params.city
+	let country = request.params.country
+	let  city = request.params.city
+	if (city === "undefined" && country === "undefined") {
+		city = "Ottawa"
+		country = "Canada"
+	}
 	const dbInfo = await City.findOne({
 		day: getDate(),
 		city,
