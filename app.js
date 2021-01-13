@@ -20,8 +20,8 @@ mongoose
 const app = express()
 app.use(helmet())
 app.use(cors())
-app.use(express.static('build'))
 app.use(express.json())
+app.use(express.static('build'))
 
 app.use("/api/info", aqiRouter)
 app.use("/api/location", locationRouter)
