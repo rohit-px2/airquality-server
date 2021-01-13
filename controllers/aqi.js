@@ -46,7 +46,6 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 		city,
 		country,
 	})
-	console.log(dbInfo)
 	if (dbInfo) {
 		console.log("Received information from MongoDB database")
 		response.status(200).json(dbInfo)
@@ -55,10 +54,8 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 		try {
 			const reqInfo = await getInfo(city)
 			console.log("Received info from API")
-			console.log(reqInfo)
 			// Fit this into our City data structure
 			const cityObj = parseCity(country, city, reqInfo.data.data)
-			console.log("The object is", cityObj)
 			await cityObj.save()
 			response.status(200).json(cityObj)
 		}

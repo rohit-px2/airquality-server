@@ -5,6 +5,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const aqiRouter = require('./controllers/aqi')
 const locationRouter = require('./controllers/location')
+const loginRouter = require('./controllers/login')
+const usersRouter = require('./controllers/users')
 
 mongoose
 	.connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex:true})
@@ -22,5 +24,7 @@ app.use(express.json())
 
 app.use("/api/info", aqiRouter)
 app.use("/api/location", locationRouter)
+app.use("/api/login", loginRouter)
+app.use("/api/users", usersRouter)
 
 module.exports = app
