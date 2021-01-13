@@ -54,6 +54,7 @@ aqiRouter.get("/:country/:city", async (request, response) => {
 		try {
 			const reqInfo = await getInfo(city)
 			console.log("Received info from API")
+			console.log(reqInfo)
 			// Fit this into our City data structure
 			const cityObj = parseCity(country, city, reqInfo.data.data)
 			await cityObj.save()
