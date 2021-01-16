@@ -1,6 +1,7 @@
 # airquality-server
 Server side (backend) of Air Quality website.
 This contains the static site, made in React (the 'build' folder), as well as the backend logic (written in Node.js).
+# Run Instructions
 To run the app you will need:
 <ul>
   <li>
@@ -20,3 +21,9 @@ Putting all of that in your .env file, you can type <br />
 in the parent directory to start the server. <br />
 To start in development mode, type <br />
 <code>>npm run dev</code> or <code>>nodemon index.js</code>.
+
+# Build Instructions (Docker)
+To build the application, in your console, type <br />
+<code>docker build -t (project name) .</code>. <br />
+You can then run the application through docker using <code>docker run -d -p (your port):3002 (project-name)</code>.
+<br />In this case, "project name" and "your port" are variables you can input.
