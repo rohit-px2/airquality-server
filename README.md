@@ -24,6 +24,6 @@ To start in development mode, type <br />
 
 # Build Instructions (Docker)
 To build the application, in your console, type <br />
-<code>docker build -t (project name) .</code>. <br />
+<code>docker build -t (project name) .</code> <br />
 You can then run the application through docker using <code>docker run -d -p (your port):3002 (project-name)</code>.
-<br />In this case, "project name" and "your port" are variables you can input.
+<br />In this case, <code>"project name"</code> and <code>"your port"</code> are variables you can input.
