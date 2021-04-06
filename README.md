@@ -27,3 +27,6 @@ To build the application, in your console, type <br />
 <code>docker build -t (project name) .</code> <br />
 You can then run the application through docker using <code>docker run -d -p (your port):3002 (project-name)</code>.
 <br />In this case, <code>"project name"</code> and <code>"your port"</code> are variables you can input.
+
+# Try it Out!
+You can find a live demo of the app [here](https://aqinfo.herokuapp.com).
