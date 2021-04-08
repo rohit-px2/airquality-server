@@ -7,6 +7,9 @@ const aqiRouter = require('./controllers/aqi')
 const locationRouter = require('./controllers/location')
 const loginRouter = require('./controllers/login')
 const usersRouter = require('./controllers/users')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
 const path = require('path')
 mongoose
   .connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false, useCreateIndex:true})
@@ -20,6 +23,15 @@ mongoose
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
+app.use(session({
+  cookieName: 'aqiSession',
+  httpOnly: true,
+  secure: true,
+  ephemeral: true,
+  resave: false,
+  secret: config.SECRET
+}))
 
 app.use("/api/info", aqiRouter)
 app.use("/api/location", locationRouter)

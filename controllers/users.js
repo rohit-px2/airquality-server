@@ -5,11 +5,20 @@ const config = require('../utils/config')
 const jwt = require('jsonwebtoken')
 
 function getTokenFrom(request) {
-	const authorization = request.get('authorization')
-	if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-		return authorization.substring(7)
+	//const authorization = request.get('authorization')
+	//if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+		//return authorization.substring(7)
+	//}
+	//return null
+	const maybe_cookie = request.body.token
+										|| request.query.token
+										|| request.headers['x-access-token']
+										|| request.cookies.token;
+	if (!maybe_cookie) {
+		console.log("User has no token");
+		throw new Error("Token does not exist.")
 	}
-	return null
+	return maybe_cookie
 }
 
 usersRouter.post("/", async (request, response) => {
